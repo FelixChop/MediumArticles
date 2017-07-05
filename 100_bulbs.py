@@ -51,7 +51,9 @@ def random_event(X):
 
 from tqdm import tqdm
 
-results = pd.concat([
-	(x, pd.concat([random_event(bernoulli(x/1000)) for i in range(100)]).reset_index(drop=True).sum(axis=1).mean())
-	for x in tqdm(range(1001))
+simulations = 1000
+
+results = pd.DataFrame([
+	(x, pd.concat([random_event(bernoulli(x/simulations)) for i in range(100)]).reset_index(drop=True).sum(axis=1).mean())
+	for x in tqdm(range(simulations+1))
 	])
